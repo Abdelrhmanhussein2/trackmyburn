@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🔥 TrackMyBurn</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #fdfbfb, #ebedee);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .container {
+      background: #ffffff;
+      padding: 50px 40px;
+      border-radius: 20px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+      text-align: center;
+      width: 420px;
+      animation: fadeIn 1s ease-out;
+    }
+    h2 {
+      color: #2196f3;
+      margin-bottom: 25px;
+      font-weight: 600;
+    }
+    form input[type="number"] {
+      width: 100%;
+      padding: 12px;
+      margin: 12px 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 15px;
+      transition: all 0.3s ease;
+    }
+    form input:focus {
+      border-color: #2196f3;
+      outline: none;
+      box-shadow: 0 0 6px rgba(33, 150, 243, 0.3);
+    }
+    .gender-group {
+      margin: 20px 0;
+      text-align: left;
+    }
+    .gender-group span {
+      font-size: 15px;
+      color: #333;
+      font-weight: 500;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .gender-option {
+      display: inline-block;
+      padding: 10px 20px;
+      margin: 10px 10px 0 0;
+      border: 2px solid #2196f3;
+      border-radius: 30px;
+      background-color: white;
+      color: #2196f3;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    .gender-option:hover {
+      background-color: #e3f2fd;
+    }
+    input[type="radio"] {
+      display: none;
+    }
+    input[type="radio"]:checked + label.gender-option {
+      background-color: #2196f3;
+      color: white;
+      border-color: #0d8ddb;
+    }
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #2196f3;
+      color: white;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+      font-weight: 500;
+      box-shadow: 0 8px 16px rgba(33, 150, 243, 0.2);
+      margin-top: 20px;
+    }
+    button:hover {
+      background: #0d8ddb;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(33, 150, 243, 0.3);
+    }
+    h3 {
+      margin-top: 25px;
+      color: #388e3c;
+      font-weight: 500;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 500px) {
+      .container {
+        width: 90%;
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🔥 Predict Calories Burnt</h2>
+    <form action="/predict" method="post">
+      <div class="gender-group">
+        <span>Select Gender:</span>
+        <input type="radio" id="male" name="Gender" value="1" required />
+        <label for="male" class="gender-option">Male</label>
+        <input type="radio" id="female" name="Gender" value="0" required />
+        <label for="female" class="gender-option">Female</label>
+      </div>
+
+      <input type="number" name="Age" placeholder="Age" required />
+      <input type="number" name="Height" placeholder="Height (cm)" required />
+      <input type="number" name="Weight" placeholder="Weight (kg)" required />
+      <input type="number" name="Duration" placeholder="Duration (min)" required />
+      <input type="number" name="Heart_Rate" placeholder="Heart Rate" required />
+      <input type="number" name="Body_Temp" placeholder="Body Temp (°C)" step="0.1" required />
+
+      <button type="submit">💪 Burn It</button>
+    </form>
+
+    {% if prediction_text %}
+    <h3>{{ prediction_text }}</h3>
+    {% endif %}
+  </div>
+</body>
+</html>
